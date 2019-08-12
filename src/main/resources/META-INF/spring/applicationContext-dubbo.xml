@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation=
+       "http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+       <!-- 给当前Provider自定义个名字 --> 
+        <dubbo:application name="dubbo-service" />
+       <!-- 注册中心 -->
+       <dubbo:registry address="192.168.1.7:2181" protocol="zookeeper" ></dubbo:registry>
+       <!-- 注册接口 -->
+        <dubbo:protocol name="dubbo" port="20888"></dubbo:protocol>
+       <dubbo:service interface="com.egou.dubbo.service.TbItemDubboService" ref="tbItemDubboServiceImpl" ></dubbo:service>
+       <dubbo:service interface="com.egou.dubbo.service.TbItemDescDubboService" ref="tbItemDescDubboServiceImpl"></dubbo:service>
+       <dubbo:service interface="com.egou.dubbo.service.TbItemCatDubboService" ref="tbItemCatDubboServiceImpl"></dubbo:service>
+       <dubbo:service interface="com.egou.dubbo.service.TbItemParamDubboService" ref="tbItemParamDubboServiceImpl"></dubbo:service>
+       <dubbo:service interface="com.egou.dubbo.service.ContentDubboService" ref="contentDubboServiceImpl" ></dubbo:service>
+       <dubbo:service interface="com.egou.dubbo.service.TbUserDubboService" ref="tbUserDubboServiceImpl" ></dubbo:service>
+       <dubbo:service interface="com.egou.dubbo.service.TbOrderDubboService" ref="tbOrderDubboServiceImpl" ></dubbo:service>
+       <bean id="tbUserDubboServiceImpl" class="com.egou.dubbo.service.impl.TbUserDubboServiceImpl"></bean>
+       <bean id="contentDubboServiceImpl" class="com.egou.dubbo.service.impl.ContentDubboServiceImpl"></bean>
+       <bean id="tbItemDubboServiceImpl" class="com.egou.dubbo.service.impl.TbItemDubboServiceImpl"></bean>
+ 	   <bean id="tbItemDescDubboServiceImpl" class="com.egou.dubbo.service.impl.TbItemDescDubboServiceImpl"></bean> 
+ 	   <bean id="tbItemCatDubboServiceImpl" class="com.egou.dubbo.service.impl.TbItemCatDubboServiceImpl"></bean> 
+ 	   <bean id="tbItemParamDubboServiceImpl" class="com.egou.dubbo.service.impl.TbItemParamDubboServiceImpl"></bean>   
+ 	   <bean id="tbOrderDubboServiceImpl" class="com.egou.dubbo.service.impl.TbOrderDubboServiceImpl"></bean>  
+       <!-- 配置注解扫描 -->
+       <dubbo:annotation package="com.egou.*.service.impl" />
+       <import resource="../../applicationContext.xml"/>
+ </beans>       
